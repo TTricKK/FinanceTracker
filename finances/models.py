@@ -5,9 +5,10 @@ class Accounts(models.Model):
     Savings = models.FloatField()
     FireExtinguisher = models.FloatField()
     Splurge = models.FloatField()
+    Everyday = models.FloatField()
 
     def __str__(self):
-        return f"Savings: {self.Savings}, Fire Extinguisher: {self.FireExtinguisher}, Splurge: {self.Splurge}"
+        return f"Savings: {self.Savings}, Fire Extinguisher: {self.FireExtinguisher}, Splurge: {self.Splurge}, Everyday: {self.Everyday}"
 
 class Expenses(models.Model):
     Date = models.DateField()
