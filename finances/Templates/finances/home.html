@@ -4,5 +4,21 @@
     </head>
     <body>
         <h1>Welcome to the Financial Tracker!</h1>
+        <div class = "table">
+            <tr>
+                <td>Savings</td>
+                <td>Fire Extinguisher</td>
+                <td>Splurge</td>
+                <td>Everyday</td>
+            </tr>
+            <tr>
+                {% for account in accounts %}
+                    <td>{{ account.Savings }}</td>
+                    <td>{{ account.FireExtinguisher }}</td>
+                    <td>{{ account.Splurge }}</td>
+                    <td>{{ account.Everyday }}</td>
+                {% endfor %}
+            </tr>
+        </div>
     </body>
 </html>
