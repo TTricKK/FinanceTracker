@@ -4,7 +4,7 @@
     </head>
     <body>
         <h1>Welcome to the Financial Tracker!</h1>
-        <div class = "table">
+        <table>
             <tr>
                 <td>Savings</td>
                 <td>Fire Extinguisher</td>
@@ -13,13 +13,36 @@
             </tr>
             <br>
             <tr>
-                {% for account in accounts %}
-                    <td>{{ account.Savings }}</td>
-                    <td>{{ account.FireExtinguisher }}</td>
-                    <td>{{ account.Splurge }}</td>
-                    <td>{{ account.Everyday }}</td>
-                {% endfor %}
+                    <td>${{ account.savings }}</td>
+                    <td>${{ account.fire_extinguisher }}</td>
+                    <td>${{ account.splurge }}</td>
+                    <td>${{ account.everyday }}</td>
             </tr>
-        </div>
+        </table>
+
+        <h2>Transaction History</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Account</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Description</th>
+            </tr>
+            {% for transaction in transactions %}
+            <tr>
+                <td>{{ transaction.date }}</td>
+                <td>{{ transaction.get_account_display }}</td>
+                <td>{{ transaction.get_transaction_type_display }}</td>
+                <td>${{ transaction.amount }}</td>
+                <td>{{ transaction.description }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan = "5">No transactions yet.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        
     </body>
 </html>

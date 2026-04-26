@@ -1,10 +1,16 @@
-from urllib import request
 from django.shortcuts import render
-from .models import Accounts
+from .models import Transaction
+from .utils import calculate_balances
 
 # Create your views here.
 def home(request):
-    accounts = Accounts.objects.all()
-    return render(request, 'finances/home.html',  {'accounts': accounts})
+    # Display current balance AND transaction history
+    balances = calculate_balances()
+    transactions = Transaction.objects.all().order_by('-date')
+
+    return render(request, 'finances/home.html', {
+        'balances': balances,
+        'transaction': transactions,
+    })
 
 

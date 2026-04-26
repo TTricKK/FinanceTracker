@@ -1,21 +1,28 @@
 from django.db import models
 
 # Create your models here.
-class Accounts(models.Model):
-    Savings = models.FloatField()
-    FireExtinguisher = models.FloatField()
-    Splurge = models.FloatField()
-    Everyday = models.FloatField()
+class Transaction(models.Model):
 
-    def __str__(self):
-        return f"Savings: {self.Savings}, Fire Extinguisher: {self.FireExtinguisher}, Splurge: {self.Splurge}, Everyday: {self.Everyday}"
+    ACCOUNT_CHOICES = [
+        ('savings', 'Savings'),
+        ('fire_extinguisher', 'Fire Extinguisher'),
+        ('splurge', 'Splurge'),
+        ('everyday', 'Everyday'),
+    ]
 
-class Expenses(models.Model):
-    Date = models.DateField()
-    Amount = models.FloatField()
-    Category = models.CharField(max_length=100)
-    Description = models.TextField()
+    TRANSACTION_TYPES = [
+        ('deposit', 'Deposit'),     # money in
+        ('withdraw', 'Withdraw'),   # money out
+    ]
 
-    def __str__(self):
-        return f"{self.Date} - {self.Category}: ${self.Amount} - {self.Description}"
+    account = models.CharField(max_length = 20, choices = ACCOUNT_CHOICES)
+    transaction_type = models.CharField(max_length = 10, choices = TRANSACTION_TYPES)
+    
+    amount = models.DecimalField(max_digits = 10, decimal_places = 2)
+    date = models.DateField()
+    description = models.CharField(max_length = 255, blank = True)
+    created_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self) -> str:
+        return f"{self.date} | {self.account} | {self.transaction_type} | {self.amount}"
 
